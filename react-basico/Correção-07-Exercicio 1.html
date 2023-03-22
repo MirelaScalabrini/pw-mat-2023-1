@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cor-verde {
+           color: green;
+        }
+
+        .cor-tomate {
+            color:tomato;
+        }
+
+    </style>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <div id = "root"></div>
+
+    <script type = "text/babel">
+        const Pessoa = ({nome, sobrenome, dia, mes, ano}) => 
+        <>
+            <p className = "cor-verde"> {nome} {sobrenome} </p>
+            <p className = "cor-tomate"> {dia}/{mes}/{ano} </p>
+            <div> Idade ao final de 2023: {2023 - ano} anos </div>
+        </>
+        const container =
+        <>
+            <Pessoa nome = "Felisbina" sobrenome = "Fernandes" ano="1988" mes="08" dia="29" />
+        </>
+        const root = ReactDOM.createRoot(document.getElementById('root')) 
+        root.render(container)
+    </script>
+</body>
+</html>
