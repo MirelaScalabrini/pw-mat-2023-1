@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    
+
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -30,51 +30,56 @@
          para armazenar os valores quando os inputs foram alterados.
       Este exercício contará para a nota de Participação e Assiduidade (PA).
     */
-   function Form() {
 
-    const valReaisRef = React.useRef()
-    const cotDolarRef = React.useRef()
-    const resultadoRef = React.useRef()
+    const DolarFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-    let valReais, cotDolar
+    // Formatação para reais
+    const RealFmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+    
+    function Form() {
 
-    function handleChange(event) {
+      const valReaisRef = React.useRef()
+      const cotDolarRef = React.useRef()
+      const resultadoRef = React.useRef()
+
+      let valReais, cotDolar
+
+      function handleChange(event) {
         valReais = Number(valReaisRef.current.value)
         cotDolar = Number(cotDolarRef.current.value)
-
+        
         let convertido = valReais / cotDolar
 
-        const DolarFmt = new Intl.NumberFormat('en-US' , {style: 'currency' , currency: 'USD'})
-        //Formatação para reais const RealFmt = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'})
-        resultadoRef.current.textCurrent = DolarFmt.format(convertido)
+        resultadoRef.current.textContent = DolarFmt.format(convertido)
+
+      }
+
+      return (
+        <>
+          <h1>Conversor de real para dólar</h1>
+          <form>
+            <div>
+              <label>
+                <span>Valor em reais</span><br/>
+                <input ref={valReaisRef} onChange={handleChange} type="number" />
+              </label>
+            </div>
+            <div>
+              <label>
+                <span>Cotação do dólar</span><br/>
+                <input ref={cotDolarRef} onChange={handleChange} type="number" />
+              </label>
+            </div>
+            <div ref={resultadoRef}></div>
+          </form>
+        </>
+      )
     }
 
-    return (
-        <>
-            <h1> Conversor de real para dólar </h1>
-            <form>
-                <div>
-                    <label>
-                        <span>Valor em reais</span><br/>
-                        <input ref={valReaisRef} onChange={handleChange} type = "number" />
-                    </label>
-                </div>
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form />)
 
-                <div>
-                    <label>
-                        <span>Cotação do dólar</span><br/>
-                        <input ref={cotDolarRef} onChange={handleChange} type = "number" />
-                    </label>
-                </div>
-
-                <div ref={resultadoRef}></div>
-
-            </form>
-        </>
-    )
-   }
-   const root = ReactDOM.createRoot(document.getElementById('root'))
-   root.render(<Form />)
-   </script>
+  </script>
+  
 </body>
 </html>

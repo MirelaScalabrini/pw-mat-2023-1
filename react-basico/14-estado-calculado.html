@@ -18,23 +18,39 @@
             console.count('ATUALIZOU O COMPONENTE')
             const [peso, setPeso] = React.useState('')
             const [altura, setAltura] = React.useState('')
-            const [imc, setImc] = React.useState('')
-            const [faixa, setFaixa] = React.useState('')
+          //  const [imc, setImc] = React.useState('')
+         // const [faixa, setFaixa] = React.useState('')
+         
+             // Estados calculados
+             let imc = calcImc()
+             let faixa = determinarFaixa()
 
-            function handleChange(event){
+                //Calculo do IMC
+                //setImc(Number(peso) / Number(altura) ** 2 )
+
+                function calcImc(){
+                    return Number(peso)/Number(altura) ** 2
+                }
+                function determinarFaixa(){
+                if(imc < 18.5)      return('Peso baixo')
+                else if(imc < 24.5) return('Peso normal')
+                else if(imc < 30)   return('Sobrepeso')
+                else if(imc < 35)   return('Obesidade (Grau I)')
+                else if(imc < 40)   return('Obesidade (Grau II)')
+                else               return('Obesidade (Grau III)')
+                }
+
+                function handleChange(event){
                 if(event.target.name === 'peso') setPeso(event.target.value)
                 else setAltura(event.target.value)
 
-                //Calculo do IMC
-                setImc(Number(peso) / Number(altura) ** 2 )
-
                 //Determinando a faixa do IMC
-                if(imc < 18.5) setFaixa('Peso baixo')
+                /*if(imc < 18.5) setFaixa('Peso baixo')
                 else if(imc < 24.5) setFaixa('Peso normal')
                 else if(imc < 30) setFaixa('Sobrepeso')
                 else if(imc < 35) setFaixa('Obesidade (Grau I)')
                 else if(imc < 40) setFaixa('Obesidade (Grau II)')
-                else setFaixa('Obesidade (Grau III)')
+                else setFaixa('Obesidade (Grau III)')*/
             }
             return(
                 <>
