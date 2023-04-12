@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function Form(){
+        console.count('Atualizou')
+       const[valor1, setNum1] = React.useState('')
+       const[valor2, setNum2] = React.useState('')
+
+
+        return (
+            <>
+                <h1>Valor real para dolar</h1>
+                <form>
+                    <div>
+                        <label>
+                            <span>Valor em Real</span><br />
+                            <input type="number" onChange={event => setNum1(event.target.value)} value={valor1} />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <span>Cotação Dólar</span><br />
+                            <input type="number"  onChange={event => setNum2(event.target.value)} value={valor2} />
+                        </label>
+                    </div>
+
+                    <div>
+                        Soma: {Number(valor1) / Number(valor2)} dolares
+                    </div>
+                </form>
+            </>
+        )
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form />)
+  </script>
+</body>
+</html>
