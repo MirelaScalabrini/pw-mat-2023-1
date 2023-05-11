@@ -11,5 +11,11 @@ const theme = createTheme({
       main: pink[500],
     },
   },
+  typography: {
+    h1: {
+      fontSize: '30px',
+      fontWeight: 'bold'
+    }
+  }
 });
 export default theme

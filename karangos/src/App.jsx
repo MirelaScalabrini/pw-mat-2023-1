@@ -8,14 +8,26 @@ import theme from './utils/theme'
 import {ThemeProvider} from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import FooterBar from './components/ui/FooterBar'
+import  CssBaseline  from '@mui/material/CssBaseline'
+
+import Homepage from './pages/Homepage'
 
 function App() {
   return (
     <>
       <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Box sx={{ width: '100vw', height: '100vh', backgroundColor: 'background.default' }}>
+        <CssBaseline />
+        <Box sx={{ width: '100vw', minHeight: '100vh', backgroundColor: 'background.default' }}>
           <TopBar />
+          <Box sx={{
+            margin: '25px 25px 55px 25px'
+          }}>
+
+            <Routes>
+              <Route path="/" element={ <Homepage />} />
+            </Routes>
+          </Box>
           <FooterBar/>
         </Box>
       </ThemeProvider>
