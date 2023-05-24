@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de área de formas geométricas planas</title>
+    <style>
+      * {
+        font-family: Candara, Arial, sans;
+      }
+      body {
+        background: linear-gradient(
+          0deg,
+          rgba(11, 1, 90, 0.75) 0%,
+          rgb(106, 236, 202) 35%,
+          rgb(0, 222, 252) 100%
+        );
+        height: 100vh;
+      }
+      main {
+        margin: 40px auto;
+        width: 512px;
+        max-width: 80%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      label {
+        display: block;
+        margin-bottom: 16px;
+      }
+      label span {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      class FormSoma extends React.Component {
+  constructor(props) {
+    super(props);
+    // Inicializa o estado com valores
+    this.state = {
+      base: window.localStorage.getItem("__base") || "",
+      altura: window.localStorage.getItem("__altura") || "",
+      tipo: window.localStorage.getItem("__tipo") || "R",
+    };
+  }
+  // Método para calcular a área com base no estado atual
+  calcularArea() {
+    let resultado;
+    switch (this.state.tipo) {
+      case "R": // Retângulo
+        resultado = Number(this.state.base) * Number(this.state.altura);
+        break;
+      case "T": // Triângulo
+        resultado = Number(this.state.base) * Number(this.state.altura) / 2;
+        break;
+      default: // Elipse/círculo
+        resultado =
+          Number(this.state.base) / 2 * (Number(this.state.altura) / 2) * Math.PI;
+    }
+    if (isNaN(resultado)) resultado = "";
+    else resultado = resultado.toLocaleString("pt-BR");
+    return resultado;
+  }
+  // Salva os valores do formulário
+  componentDidMount() {
+    window.localStorage.setItem("__base", this.state.base);
+    window.localStorage.setItem("__altura", this.state.altura);
+    window.localStorage.setItem("__tipo", this.state.tipo);
+  }
+  render() {
+    // Calcula a área
+    const area = this.calcularArea();
+    return (
+      <main>
+        <h1>Calculadora de área de formas geométricas planas</h1>
+        <form>
+          <label>
+            <span>Medida da base</span>
+            <input
+              type="number"
+              value={this.state.base}
+              onChange={(e) => this.setState({ base: e.target.value })}/>
+          </label>
+          <label>
+            <span>Medida da altura</span>
+            <input
+              type="number"
+              value={this.state.altura}
+              onChange={(e) => this.setState({ altura: e.target.value })}
+            />
+          </label>
+          <label>
+            <span>Tipo de forma</span>
+            <select
+              value={this.state.tipo}
+              onChange={(e) => this.setState({ tipo: e.target.value })}>
+              <option value="R">Retângulo</option>
+              <option value="T">Triângulo</option>
+              <option value="E">Elipse/círculo</option>
+            </select>
+          </label>
+          <label>
+            <span>Área calculada</span>
+            <div>
+              <strong>{area}</strong>
+            </div>
+          </label>
+        </form>
+      </main>
+    );
+  }
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<FormSoma />);
