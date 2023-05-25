@@ -90,7 +90,7 @@ export default function CustomersList(){
             align: 'center',
             width: 90,
             renderCell: params => 
-                <IconButton arial-label="Editar">
+                <IconButton aria-label="Editar">
                     <EditIcon />
                 </IconButton>
         },
@@ -101,7 +101,7 @@ export default function CustomersList(){
             align: 'center',
             width: 90,
             renderCell: params => 
-            <IconButton arial-label="Excluir">
+            <IconButton aria-label="Excluir">
                 <DeleteForeverIcon color="error" />
             </IconButton>
         }
