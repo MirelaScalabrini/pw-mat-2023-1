@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { yellow, pink } from '@mui/material/colors';
+import { ptBR } from '@mui/x-data-grid'
 
 const theme = createTheme({
   palette: {
@@ -17,5 +18,5 @@ const theme = createTheme({
       fontWeight: 'bold'
     }
   }
-});
+}, ptBR);
 export default theme
