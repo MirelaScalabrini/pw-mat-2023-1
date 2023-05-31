@@ -6,7 +6,10 @@ import { format } from 'date-fns'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton'
-
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import { Link } from 'react-router-dom'
 
 export default function CustomersList(){
 
@@ -90,9 +93,11 @@ export default function CustomersList(){
             align: 'center',
             width: 90,
             renderCell: params => 
+                <Link to={'./' + params.id}>
                 <IconButton aria-label="Editar">
                     <EditIcon />
                 </IconButton>
+                </Link>
         },
         {
             field: 'delete',
@@ -101,11 +106,28 @@ export default function CustomersList(){
             align: 'center',
             width: 90,
             renderCell: params => 
-            <IconButton aria-label="Excluir">
+            <IconButton aria-label="Excluir" onClick={() => handleDeleteButtonClick(params.id)}>
                 <DeleteForeverIcon color="error" />
             </IconButton>
         }
       ];
+
+    async function handleDeleteButtonClick(id) {
+        if(confirm('Deseja realmente excluir este irem?')){
+            try {
+                //faz a chamada ao back-end para excluir o cliente
+                const result = await fetch(`https://api.faustocintra.com.br/customers/${id}`, {
+                    method: 'DELETE'
+                })
+                // Se a exclusão tiver sido feita xom sucesso, atualiza a listagem
+                if(result.ok) loadData()
+                alert('Exclusão efetuada com sucesso!')
+            }
+            catch(error) {
+                console.error(error)
+            }
+        }
+      }
 
     return (
         <>
@@ -113,6 +135,18 @@ export default function CustomersList(){
                 Listagem de clientes
             </Typography>
 
+            <Box sx= {{
+                display: 'flex',
+                justifyContent: 'rigth',
+                mb: '25px' //margin-bottom
+
+            }}>
+                <Link to="new">
+                    <Button variant="contained" color="secondary" size="large" startIcon={<AddBoxIcon />}>
+                        Cadastrar novo cliente
+                    </Button>
+                </Link>
+            </Box>
             <Paper elevation={4} sx={{ height: 400, width: '100%' }}>
                 <DataGrid
                     rows={customers}
