@@ -135,18 +135,22 @@ export default function CustomersList(){
                 Listagem de clientes
             </Typography>
 
-            <Box sx= {{
-                display: 'flex',
-                justifyContent: 'rigth',
-                mb: '25px' //margin-bottom
-
-            }}>
-                <Link to="new">
-                    <Button variant="contained" color="secondary" size="large" startIcon={<AddBoxIcon />}>
-                        Cadastrar novo cliente
-                    </Button>
-                </Link>
-            </Box>
+            <Box sx={{
+        display: 'flex',
+        justifyContent: 'right',
+        mb: '25px'  // margin-bottom
+      }}>
+        <Link to="new">
+          <Button 
+            variant="contained" 
+            color="secondary"
+            size="large"
+            startIcon={<AddBoxIcon />}
+          >
+            Cadastrar novo cliente
+          </Button>
+        </Link>
+      </Box>
             <Paper elevation={4} sx={{ height: 400, width: '100%' }}>
                 <DataGrid
                     rows={customers}
