@@ -9,9 +9,11 @@ import Divider from '@mui/material/Divider'
 export default function MainMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  // Função para abrir com o clique o ícone do menu
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  // Função para fechar o menu
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -40,7 +42,8 @@ export default function MainMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem divider 
+        {/* opções do menu que são links que redirecionam os usuários para uma rota específica*/}
+        <MenuItem Divider 
         onClick={handleClose}
         component={Link}
         to="/"

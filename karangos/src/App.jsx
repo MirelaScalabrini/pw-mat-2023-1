@@ -28,9 +28,9 @@ function App() {
           <Box sx={{
             margin: '25px 25px 55px 25px'
           }}>
-
-            <Routes>
-              <Route path="/" element={ <Homepage />} />
+            {/* rotas específicas onde define o caminho da rota e o componente que será renderizado */}
+            <Routes> 
+              <Route path="/" element={ <Homepage />} /> 
               <Route path="/customers" element={ <CustomersList />} />
               <Route path="/customers/news" element={ <CustomersForm />} />
               <Route path="/customers/:id" element={ <CustomersForm />} />

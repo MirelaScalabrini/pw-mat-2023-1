@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 export default function CarsList(){
 
     const [state, setState] = React.useState({
-        cars: {}
+        cars: {} //inicia vazio
     })
     //Desestruturando as variáveis de estado
     const {
@@ -131,7 +131,7 @@ export default function CarsList(){
                 const result = await fetch(`https://api.faustocintra.com.br/cars/${id}`, {
                     method: 'DELETE'
                 })
-                // Se a exclusão tiver sido feita xom sucesso, atualiza a listagem
+                // Se a exclusão tiver sido feita com sucesso, atualiza a listagem
                 if(result.ok) loadData()
                 alert('Exclusão efetuada com sucesso!')
             }
@@ -141,8 +141,9 @@ export default function CarsList(){
         }
       }
 
-    return (
-                // Tamanho da fonte
+    return (    
+                //monta a estrutura da página de listagem de carros, incluindo o título, o botão de cadastro e a tabela com os dados.
+                // Tamanho da fonte - Typogrphy
         <>
             <Typography variant="h1" sx={{mb: '50px' }}> 
                 Listagem de carros
